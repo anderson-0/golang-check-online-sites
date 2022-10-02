@@ -33,7 +33,7 @@ func registerLog(site string, status bool) {
 		fmt.Println("Error when opening log file:", err)
 	}
 
-	file.WriteString(site + " - online: " + strconv.FormatBool(status) + " - " + time.Now().Format("Mon Jan _2 15:04:05 MST 2006") + " \n")
+	file.WriteString(site + " - " + time.Now().Format("02/01/2006 15:04:05") + " - online: " + strconv.FormatBool(status) + "\n")
 
 	file.Close()
 
