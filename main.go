@@ -25,14 +25,26 @@ func readCommand() int {
 	return command
 }
 
+func registerLog(site string, status bool) {
+	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Error when opening log file:", err)
+	}
+
+	fmt.Println(arquivo)
+}
+
 func testSite(site string) {
 	res, err := http.Get(site)
 	if err != nil {
 		fmt.Println("Error when checking website: ", err)
 	} else if res.StatusCode == 200 {
 		fmt.Println("Site:", site, "was loaded with success!")
+		registerLog(site, true)
 	} else {
 		fmt.Println("Site:", site, "was loaded with error:", res.StatusCode)
+		registerLog(site, false)
 	}
 }
 
